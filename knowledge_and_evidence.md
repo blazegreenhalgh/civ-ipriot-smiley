@@ -53,7 +53,7 @@ Address the following tasks and questions based on the code provided in this rep
 3. Run the project locally by executing the `main.py` file
 4. Evidence this by providing screenshots of the project directory structure and the output of the `main.py` file
 
-![Local Execution (INSERT YOUR SCREENSHOT)](screenshots/CREATE_A_SCREENSHOT_OF_YOUR_local_setup.png)
+![Local Execution](screenshots/2.1-evidence.png)
 
 If you are running on a Raspberry Pi, you can use the following command to run the project and then screenshot the result:
 
@@ -70,50 +70,53 @@ python3 main.py
 
    | Type                    | name       | value          |
    | ----------              | ---------- | -------------- |
-   | built-in primitive type | _          |  _             |
-   | built-in composite type | _          |  _             |
-   | user-defined type       | _          |  _             |
+   | built-in primitive type | dimmed          |  True             |
+   | built-in composite type | WHITE          |  (255,255,255)             |
+   | user-defined type(class etc)       | Smiley          | Lines 4-39              |
 
 2. Fill in (`_`) the following table based on the code in `smiley.py`:
 
    | Object                   | Type                    |
    | ------------             | ----------------------- |
-   | self.pixels              | _                       |
-   | A member of self.pixels  | _                       |
-   | self                     | _                       |
+   | self.pixels              | Dictionary                       |
+   | A member of self.pixels  | Tuple                       |
+   | self                     | Class                       |
 
 3. Examine the code for `smiley.py`, `sad.py`, and `happy.py`. Give an example of each of the following control structures using an example from **each** of these files. Include the first line and the line range:
 
    | Control Flow | File       | First line  | Line range  |
    | ------------ | ---------- | ----------- | ----------- |
-   |  sequence    |  _         | _           | _           |
-   |  selection   | _          | _           | _           |
-   |  iteration   | _          | _           | _           |
+   |  sequence    |  happy.py         |  import time |  1-5         |
+   |  selection   | sad.py          | if wide_open:           | 26-29           |
+   |  iteration   | sad.py          | for pixel in eyes:     | 25-30           |
 
 4. Though everything in Python is an object, it is sometimes said to have four "primitive" types. Examining the three files `smiley.py`, `sad.py`, and `happy.py`, identify which of the following types are used in any of these files, and give an example of each (use an example from the code, if applicable, otherwise provide an example of your own):
 
    | Type                    | Used? | Example |
    | ----------------------- | ----- | --------|
-   | int                     | _     | _          |
-   | float                   | _     | _          |
-   | str                     | _     | _          |
-   | bool                    | _     | _          |
+   | int                     | Y     |  41, 46, 50, 51, 52, 53 (happy.py)  |
+   | float                   | Y     | delay=0.25 (happy.py)          |
+   | str                     | N     | "I used to be a cannon cleaner, until they fired me."          |
+   | bool                    | Y     | dimmed=True (smiley.py)          |
 
 5. Examining `smiley.py`, provide an example of a class variable and an instance variable (attribute). Explain **why** one is defined as a class variable and the other as an instance variable.
 
-> Your answer here
->
+> `WHITE = ...` is an example of a **class variable**. This is because we want all instances to share the same colour set. 
+
+>`self.pixels = ...` is an example of an **instance variable**. It references `self` which is a reference to the instance that is instantiated. This is because we want to individually manipulate the pixel set for each instance - otherwise all instances will display the same.
+
 
 6. Examine `happy.py`, and identify the constructor (initializer) for the `Happy` class:
    1. What is the purpose of a constructor (in general) and this one (in particular)?
 
-   > Your answer here
-   >
+   > A constructor / initializer defines a 'standard' or set of attributes that is inherited when an instance is instantiated.
+
+   > This particular initializer is used to inherit from it's super class, `Smiley`. It also immediately and automatically calls the methods defined in it's own class.
 
    2. What statement(s) does it execute (consider the `super` call), and what is the result?
 
-   > Your answer here
-   >
+   > It executes the initialiser from `Smiley` and executes method calls.
+   > This results in `Happy` inheriting initializer attributes from `Smiley` (such as colours, pixels, etc.) while also immediately calling it's own set of methods that alter the inherited pixel set to make a :)
 
 ### 2.3. Code style
 
