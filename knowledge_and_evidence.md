@@ -122,18 +122,18 @@ python3 main.py
 
 1. What code style is used in the code? Is it likely to be the same as the code style used in the SenseHat? Give to reasons as to why/why not:
 
-> Your answer here
->
+> The code is using PEP8 as it's coding style/standard. It's likely that the SenseHat is using the same coding style. My main reason for believing so is in `smiley.py` in the `dim_display()` and `show_self()` functions; accessing methods from the imported SenseHat class, we can see the methods are using snake_case. Additionally, the import is from *sense_hat* (snake_case)
 
 2. List three aspects of this convention you see applied in the code.
 
-> Your answer here
->
+> 1. snake_case
+> 2. `sad.py` line 28: line break after `else:`
+> 3. Classes use PascalCase
 
 3. Give two examples of organizational documentation in the code.
 
-> Your answer here
->
+> sad.py `draw_mouth()` method docstring
+> main.py docstring
 
 ### 2.4. Identifying and understanding classes
 
@@ -145,17 +145,19 @@ python3 main.py
 
 | Class Name | Super or Sub? | Direct parent(s) |
 | ---------- | ------------- | ---------------- |
-| NotReal    | Sub           | NotRealParent    |
-|   ...      |   ...         |      ...         |
+| Happy    | Sub           | Smiley, Blinkable    |
+|   Sad      |   Sub         |      Smiley         |
+|   Smiley      |   Super         |      Object         |
+|   Blinkable      |   Super         |      ABC         |
 
 2. Explain the concept of abstraction, giving an example from the project (note "implementing an ABC" is **not** in itself an example of abstraction). (Max 150 words)
 
-> Your answer here
->
+> Abstraction is the process of hiding or *abstracting* the finer details and logic of a process and providing the user an interface to perform an action that doesn't require knowledge of how it works. 
+> # TO DO
 
 3. What is the name of the process of deriving from base classes? What is its purpose in this project? (Max 150 words)
 
-> Your answer here
+> This is called inheritance. This is used extensively in this project for providing each 'emotion' or 'face' the pixel set, the colours, encapsulating the SenseHat object, and actually setting the pixels on the SenseHat (+ more). Without this inheritance, the other classes methods simply won't work. 
 >
 
 ### 2.5. Compare and contrast classes
@@ -163,28 +165,27 @@ python3 main.py
 Compare and contrast the classes Happy and Sad.
 
 1. What is the key difference between the two classes?
-   > Your answer here
-   >
+   > Besides the obvious difference of pixel set changes.
+   > The main difference is that Happy is blinkable, therefore it must define a `blink()` method, which it has done. 
 2. What are the key similarities?
-   > Your answer here
+   > Both have `draw_eyes()` and `draw_mouth()`, and both inherit from `Smiley`
    >
 3. What difference stands out the most to you and why?
-   > Your answer here
-   >
-4. How does this difference affect the functionality of these classes
-   > Your answer here
-   >
+   > Only Happy blinks! Sad people blink too!
+   
+   > Also, side note: Sad `draw_mouth()` docstring doesn't explain how it draws the mouth, Happy does. I don't think there should be a change in information for effectively the same method.
 
-### 2.6. Where is the Sense(Hat) in the code?
+4. How does this difference affect the functionality of these classes
+   > Happy now *must* blink - it now has no choice, since it has inherited a base method. 
 
 1. Which class(es) utilize the functionality of the SenseHat?
-   > Your answer here
+   > Smiley, Happy, Sad - currently, Sad technically is not *utilising* the functionality, but it definitely can. Happy, on the other hand, is using it's inherited methods to `.show()`.
    >
 2. Which of these classes directly interact with the SenseHat functionalities?
-   > Your answer here
+   > Currently, Happy. I think this is a trick question and expects the answer Smiley, but from my understanding it is actually Happy in main.py. Since the methods that interact with Sensehat are *inherited* from Smiley, not just borrowing. 
    >
 3. Discuss the hiding of the SenseHAT in terms of encapsulation (100-200 Words)
-   > Your answer here
+   > The SenseHat is contained in a seperate file, and only the necessary aspects for the project are accessed in our project files. This protects the integrity of the SenseHat program, and ensures no values are accidentally changed and no functions/methods are accidentally (or purposefully) called. The internal state is not exposed for misuse, and the necessary details are presented in a well-defined interface such as `show()` and `dim_display()` that implicitely define access rules. We simply do not need all the inner workings of the SenseHat to complete the tasks necessary for our project, so we hide them to prevent modification. This also bleeds into abstraction.  
    >
 
 ### 2.7. Sad Smileys Can’t Blink (Or Can They?)
@@ -195,22 +196,22 @@ Unlike the `Happy` smiley, the current implementation of the `Sad` smiley does n
 
 1. Does the code's author believe that every `Smiley` should be able to blink? Explain.
 
-> Your answer here
+> The code has been written to suggest Yes. If he did not believe so, he would not have written an abstract class - he would have simply written the method into Happy and be done with it. Abstracting this ability into an ABC implies that there are other smileys that should or will be able to blink. 
 >
 
 2. For those smileys that blink, does the author expect them to blink in the same way? Explain.
 
-> Your answer here
+> No - he has provided a delay param that directs how long the blink duration is. Interestingly, this is not something required by the ABC but coded into the Happy class itself. The author, based on his code, has clearly not been happy before, since no happy person blinks like that. I am simply making an observation, and not a judgement on his character (maybe)
 >
 
 3. Referring to the implementation of blink in the Happy and Sad Smiley classes, give a brief explanation of what polymorphism is.
 
-> Your answer here
+> Polymorphism is performing the same action/process in different ways. In the case of blinking, the Blinkable class defines the need to blink(), but does not specify *how*. This is polymorphism being setup, as it leaves it up to the subclasses to determine this, on a per-subclass basis, as Happy has done.
 >
 
 4. How is inheritance used in the blink method, and why is it important for polymorphism?
 
-> Your answer here
+> Happy's blink() utilises the inherited method `show()` - inherited from Smiley. It's important for polymorphism as it allows multiple ways to affect the same thing - in this case, it allows for multiple ways to program the blink() function (polymorphism) while still allowing it to provide the same end result (inheritance)
 >
 1. **Implement Blink in Sad Class:**
 
