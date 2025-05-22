@@ -153,7 +153,7 @@ python3 main.py
 2. Explain the concept of abstraction, giving an example from the project (note "implementing an ABC" is **not** in itself an example of abstraction). (Max 150 words)
 
 > Abstraction is the process of hiding or *abstracting* the finer details and logic of a process and providing the user an interface to perform an action that doesn't require knowledge of how it works. 
-> # TO DO
+> An example of this is the SenseHat(). We have a clearly defined interface for interacting with the SenseHat, without needing to know the fine details of how it works.
 
 3. What is the name of the process of deriving from base classes? What is its purpose in this project? (Max 150 words)
 
@@ -218,8 +218,12 @@ Unlike the `Happy` smiley, the current implementation of the `Sad` smiley does n
    - Create a new method called `blink` within the Sad class. Ensure you use the same method signature as in the Happy class:
 
    ```python
-   def blink(self, delay=0.25):
-       pass  # Replace 'pass' with your implementation
+    def blink(self, delay=0.25):
+        self.draw_eyes(wide_open=False)
+        self.show()
+        time.sleep(delay)
+        self.draw_eyes(wide_open=True)
+        self.show()
    ```
 
 2. **Code Implementation:** Implement the code that allows the Sad smiley to blink. Use the implementation from the Happy Smiley as a reference. Ensure your new method functions similarly by controlling the blink duration through the `delay` argument.
@@ -230,11 +234,11 @@ Unlike the `Happy` smiley, the current implementation of the `Sad` smiley does n
 
 Include a screenshot of the sad smiley or the modified `main.py`:
 
-![Sad Smiley Blinking](screenshots/sad_blinking.png)
+![Sad Smiley Blinking](screenshots/sad-blink-implementation.png)
 
 - Observe and document the Sad smiley as it blinks its eyes. Describe any adjustments or issues encountered during implementation.
 
-  > Your answer here
+  > The Sad smiley blinks just as the Happy smiley does. I did have to import time, and adjust main.py to import and instantiate a Sad smiley instead of Happy.
 
   ### 2.8. If It Walks Like a Duck…
 
@@ -242,23 +246,23 @@ Include a screenshot of the sad smiley or the modified `main.py`:
 
   1. **Class Type Analysis:** What kind of class is `Blinkable`? Inspect its superclass for clues about its classification.
 
-     > Your answer here
+     > `Blinkable` is an Abstract Base Class.
 
   2. **Class Implementation:** `Blinkable` is a class intended to be implemented by other classes. What generic term describes this kind of class, which is designed for implementation by others? **Clue**: Notice the lack of any concrete implementation and the naming convention.
 
-  > Your answer here
+  > Abstract class.
 
   3. **OO Principle Identification:** Regarding your answer to question (2), which Object-Oriented (OO) principle does this represent? Choose from the following and justify your answer in 1-2 sentences: Abstraction, Polymorphism, Inheritance, Encapsulation.
 
-  > Your answer here
+  > Polymorphism. It determines *specific* methods that must be created with each sub-classes own implementation. It forces the same idea upon it's subs, yet implemented in different ways. 
 
   4. **Implementation Flexibility:** Explain why you could grant the Sad Smiley a blinking feature similar to the Happy Smiley's implementation, even without directly using `Blinkable`.
 
-  > Your answer here
+  > 1. None of these used methods were unique to the blinkable class. 2. You can still *create* these methods, you just don't *have* to.
 
   5. **Concept and Language Specificity:** In relation to your response to question (4), what is this capability known as, and why is it feasible in Python and many other dynamically typed languages but not in most statically typed programming languages like C#? **Clue** This concept is hinted at in the title of this section.
 
-  > Your answer here
+  > This capability is known as duck typing. It's not possible in most statically typed languages as they rely on the declared type to determine if a method is able to be called or not. In Python, this is not the case - you don't have to declare types explicitly. It will allow you to call blink() so long as it exists in the class. Essentially, most STL's require you to explicitly define where blink comes from - Python does not.
 
   ***
 
