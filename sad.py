@@ -3,7 +3,7 @@ import time
 
 class Sad(Smiley):
     def __init__(self):
-        super().__init__()
+        super().__init__(complexion=self.BLUE)
 
         self.draw_mouth()
         self.draw_eyes()
@@ -11,7 +11,7 @@ class Sad(Smiley):
     def draw_mouth(self):
         """
         Draws the mouth feature on a smiley
-        """
+        """ 
         mouth = [49, 54, 42, 43, 44, 45]
         for pixel in mouth:
             self.pixels[pixel] = self.BLANK
